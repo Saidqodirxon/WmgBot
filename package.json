@@ -1,0 +1,35 @@
+{
+  "name": "wmg-bot",
+  "version": "1.0.0",
+  "description": "WMG Telegram Bot va Admin Panel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "admin-panel"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.3",
+    "lucide": "^0.294.0",
+    "mongoose": "^8.21.0",
+    "multer": "^1.4.5-lts.1",
+    "telegraf": "^4.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

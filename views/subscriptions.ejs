@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kategoriyalar - WMG Admin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/header', { user: user }) %>
+
+    <div class="container">
+      <div class="page-header">
+        <h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"
+            />
+          </svg>
+          Obuna kategoriyalari
+        </h1>
+        <p class="page-subtitle">Botdagi kurs yo'nalishlarini boshqarish</p>
+      </div>
+
+      <% if (success) { %>
+      <div class="alert alert-success"><%= success %></div>
+      <% } %> <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <div class="content-card">
+        <div class="card-header">
+          <h2>Yangi kategoriya qo'shish</h2>
+        </div>
+        <form
+          action="/admin/subscriptions/add"
+          method="POST"
+          class="bilingual-form"
+        >
+          <div class="form-row">
+            <div class="form-col">
+              <h3 class="lang-label">O'zbekcha (Lotin)</h3>
+
+              <div class="form-group">
+                <label for="name_latin">Kategoriya nomi:</label>
+                <input
+                  type="text"
+                  id="name_latin"
+                  name="name_latin"
+                  required
+                  placeholder="Frontend Development"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="description_latin">Tavsif:</label>
+                <textarea
+                  id="description_latin"
+                  name="description_latin"
+                  rows="3"
+                  placeholder="HTML, CSS, JavaScript, React..."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-col">
+              <h3 class="lang-label">Ўзбекча (Кирилл)</h3>
+
+              <div class="form-group">
+                <label for="name_cyrillic">Категория номи:</label>
+                <input
+                  type="text"
+                  id="name_cyrillic"
+                  name="name_cyrillic"
+                  required
+                  placeholder="Фронтенд Девелопмент"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="description_cyrillic">Тавсиф:</label>
+                <textarea
+                  id="description_cyrillic"
+                  name="description_cyrillic"
+                  rows="3"
+                  placeholder="HTML, CSS, JavaScript, React..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+              />
+            </svg>
+            Qo'shish
+          </button>
+        </form>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header">
+          <h2>Mavjud kategoriyalar</h2>
+          <span class="badge"><%= subscriptions.length %> ta</span>
+        </div>
+
+        <% if (subscriptions.length === 0) { %>
+        <div class="empty-state">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="64"
+            height="64"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+            />
+            <path
+              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+            />
+          </svg>
+          <p>Hozircha kategoriyalar yo'q</p>
+        </div>
+        <% } else { %>
+        <div class="subscriptions-grid">
+          <% subscriptions.forEach(item => { %>
+          <div class="subscription-card">
+            <div class="subscription-content">
+              <h3><%= item.name_latin || item.name %></h3>
+              <h4 class="cyrillic-name">
+                <%= item.name_cyrillic || item.name %>
+              </h4>
+              <% if (item.description_latin || item.description) { %>
+              <p class="description">
+                <%= item.description_latin || item.description %>
+              </p>
+              <% } %>
+              <p class="date">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                  />
+                </svg>
+                <%= new Date(item.created_at).toLocaleDateString('uz-UZ') %>
+              </p>
+            </div>
+            <div class="subscription-actions">
+              <form
+                action="/admin/subscriptions/delete/<%= item.id || item._id %>"
+                method="POST"
+                onsubmit="return confirm('O\'chirishni tasdiqlaysizmi?')"
+              >
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                    />
+                    <path
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                    />
+                  </svg>
+                  O'chirish
+                </button>
+              </form>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Broadcast - WMG Admin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/header', { user: user }) %>
+
+    <div class="container">
+      <div class="page-header">
+        <h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+            />
+          </svg>
+          Xabar yuborish (Broadcast)
+        </h1>
+        <p class="page-subtitle">Foydalanuvchilarga guruhli xabar yuborish</p>
+      </div>
+
+      <% if (success) { %>
+      <div class="alert alert-success"><%= success %></div>
+      <% } %> <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <div class="broadcast-layout">
+        <div class="content-card broadcast-form-card">
+          <div class="card-header">
+            <h2>Xabar yuborish</h2>
+          </div>
+          <form action="/admin/broadcast/send" method="POST">
+            <div class="form-row">
+              <div class="form-col">
+                <h3 class="lang-label">O'zbekcha (Lotin)</h3>
+                <div class="form-group">
+                  <label for="message_latin">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm0 3a.5.5 0 0 1 0-1h6a.5.5 0 0 1 0 1h-6zm0 3a.5.5 0 0 1 0-1h6a.5.5 0 0 1 0 1h-6zm0 3a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm10.113-5.373a6.59 6.59 0 0 0-.445-.275l.21-.352c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.72.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.326-.182.569-.182h.281a1.686 1.686 0 0 0-.123-.498 1.379 1.379 0 0 0-.252-.37 1.94 1.94 0 0 0-.346-.298z"
+                      />
+                    </svg>
+                    Xabar matni:
+                  </label>
+                  <textarea
+                    id="message_latin"
+                    name="message_latin"
+                    rows="8"
+                    required
+                    placeholder="Assalomu aleykum!&#10;&#10;Yangi kurs boshlandi..."
+                    class="broadcast-textarea"
+                  ></textarea>
+                  <small class="form-hint"
+                    >Markdown: *qalin*, _kursiv_, `kod`</small
+                  >
+                </div>
+              </div>
+
+              <div class="form-col">
+                <h3 class="lang-label">Ўзбекча (Кирилл)</h3>
+                <div class="form-group">
+                  <label for="message_cyrillic">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm0 3a.5.5 0 0 1 0-1h6a.5.5 0 0 1 0 1h-6zm0 3a.5.5 0 0 1 0-1h6a.5.5 0 0 1 0 1h-6zm0 3a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm10.113-5.373a6.59 6.59 0 0 0-.445-.275l.21-.352c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.72.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.326-.182.569-.182h.281a1.686 1.686 0 0 0-.123-.498 1.379 1.379 0 0 0-.252-.37 1.94 1.94 0 0 0-.346-.298z"
+                      />
+                    </svg>
+                    Хабар матни:
+                  </label>
+                  <textarea
+                    id="message_cyrillic"
+                    name="message_cyrillic"
+                    rows="8"
+                    required
+                    placeholder="Ассалому алайкум!&#10;&#10;Янги курс бошланди..."
+                    class="broadcast-textarea"
+                  ></textarea>
+                  <small class="form-hint"
+                    >Markdown: *қалин*, _курсив_, `код`</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subscription">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"
+                  />
+                  <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                </svg>
+                Kimga yuborish:
+              </label>
+              <select
+                id="subscription"
+                name="subscription"
+                required
+                class="select-filter"
+              >
+                <option value="all">🌐 Barcha foydalanuvchilarga</option>
+                <% subscriptions.forEach(sub => { %>
+                <option value="<%= sub.name_latin || sub.name %>">
+                  <%= sub.name_latin || sub.name %> yo'nalishiga
+                </option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <div class="form-section">
+              <h3 class="section-title">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                  />
+                </svg>
+                Tugma qo'shish (ixtiyoriy)
+              </h3>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="button_text">Tugma matni:</label>
+                  <input
+                    type="text"
+                    id="button_text"
+                    name="button_text"
+                    placeholder="Batafsil"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="button_url">Tugma URL:</label>
+                  <input
+                    type="url"
+                    id="button_url"
+                    name="button_url"
+                    placeholder="https://wmg.uz"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success btn-large"
+              onclick="return confirm('Xabar yuborilsinmi?')"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
+                />
+              </svg>
+              Yuborish
+            </button>
+          </form>
+        </div>
+
+        <div class="content-card broadcast-info-card">
+          <div class="card-header">
+            <h2>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                  d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                />
+              </svg>
+              Ma'lumot
+            </h2>
+          </div>
+          <div class="info-list">
+            <div class="info-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                />
+              </svg>
+              <span
+                >Markdown formatidan foydalaning: *qalin*, _kursiv_, `kod`</span
+              >
+            </div>
+            <div class="info-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                />
+              </svg>
+              <span>Tugma qo'shish majburiy emas</span>
+            </div>
+            <div class="info-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                />
+              </svg>
+              <span>Yo'nalish bo'yicha filtrlab yuborishingiz mumkin</span>
+            </div>
+            <div class="info-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                />
+              </svg>
+              <span>Xabar ketma-ket yuboriladi</span>
+            </div>
+            <div class="info-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                />
+              </svg>
+              <span>Barcha tillar uchun bir xil xabar yuboriladi</span>
+            </div>
+          </div>
+
+          <div class="markdown-examples">
+            <h3>Markdown namunalari:</h3>
+            <div class="code-block">
+              <code>*Qalin matn*</code>
+              <code>_Kursiv matn_</code>
+              <code>`Kod matn`</code>
+              <code>[Havola](https://example.com)</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yangiliklar - WMG Admin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/header', { user: user }) %>
+
+    <div class="container">
+      <div class="page-header">
+        <h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"
+            />
+            <path
+              d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"
+            />
+          </svg>
+          Yangiliklar
+        </h1>
+        <p class="page-subtitle">Telegram botdagi yangiliklar va e'lonlar</p>
+      </div>
+
+      <% if (success) { %>
+      <div class="alert alert-success"><%= success %></div>
+      <% } %> <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <div class="content-card">
+        <div class="card-header">
+          <h2>Yangi xabar qo'shish</h2>
+        </div>
+        <form
+          action="/admin/news/add"
+          method="POST"
+          enctype="multipart/form-data"
+          class="bilingual-form"
+        >
+          <div class="form-row">
+            <div class="form-col">
+              <h3 class="lang-label">O'zbekcha (Lotin)</h3>
+
+              <div class="form-group">
+                <label for="title_latin">Sarlavha:</label>
+                <input
+                  type="text"
+                  id="title_latin"
+                  name="title_latin"
+                  placeholder="Yangilik sarlavhasi"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="content_latin">Matn:</label>
+                <textarea
+                  id="content_latin"
+                  name="content_latin"
+                  rows="6"
+                  placeholder="Yangilik matni..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-col">
+              <h3 class="lang-label">Ўзбекча (Кирилл)</h3>
+
+              <div class="form-group">
+                <label for="title_cyrillic">Сарлавҳа:</label>
+                <input
+                  type="text"
+                  id="title_cyrillic"
+                  name="title_cyrillic"
+                  placeholder="Янгилик сарлавҳаси"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="content_cyrillic">Матн:</label>
+                <textarea
+                  id="content_cyrillic"
+                  name="content_cyrillic"
+                  rows="6"
+                  placeholder="Янгилик матни..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                <path
+                  d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
+                />
+              </svg>
+              Rasm yuklash (ixtiyoriy):
+            </label>
+            <input type="file" id="image" name="image" accept="image/*" />
+            <small class="form-hint"
+              >5 MB gacha JPG, PNG formatdagi rasmlar</small
+            >
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+              />
+            </svg>
+            Qo'shish
+          </button>
+        </form>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header">
+          <h2>Barcha yangiliklar</h2>
+          <span class="badge"><%= news.length %> ta</span>
+        </div>
+
+        <% if (news && news.length > 0) { %>
+        <div class="news-grid">
+          <% news.forEach(item => { %>
+          <div class="news-card">
+            <% if (item.image_url) { %>
+            <div class="news-card-image">
+              <img
+                src="<%= item.image_url %>"
+                alt="<%= item.title_latin || item.title_cyrillic %>"
+              />
+            </div>
+            <% } %>
+            <div class="news-card-content">
+              <div class="news-languages">
+                <div class="news-lang-item">
+                  <span class="lang-badge">Lotin</span>
+                  <h3><%= item.title_latin || 'N/A' %></h3>
+                  <p>
+                    <%= (item.content_latin || '').substring(0, 150) %><%=
+                    item.content_latin && item.content_latin.length > 150 ?
+                    '...' : '' %>
+                  </p>
+                </div>
+                <div class="news-lang-divider"></div>
+                <div class="news-lang-item">
+                  <span class="lang-badge cyrillic">Кирилл</span>
+                  <h3><%= item.title_cyrillic || 'N/A' %></h3>
+                  <p>
+                    <%= (item.content_cyrillic || '').substring(0, 150) %><%=
+                    item.content_cyrillic && item.content_cyrillic.length > 150
+                    ? '...' : '' %>
+                  </p>
+                </div>
+              </div>
+              <div class="news-card-footer">
+                <span class="news-date">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                    />
+                  </svg>
+                  <%= new Date(item.created_at).toLocaleDateString('uz-UZ', {
+                  year: 'numeric', month: 'long', day: 'numeric' }) %>
+                </span>
+                <form
+                  action="/admin/news/delete/<%= item.id || item._id %>"
+                  method="POST"
+                  onsubmit="return confirm('O\'chirishni tasdiqlaysizmi?')"
+                >
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                      />
+                      <path
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                      />
+                    </svg>
+                    O'chirish
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <% } else { %>
+        <div class="empty-state">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="64"
+            height="64"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"
+            />
+          </svg>
+          <p>Hozircha yangiliklar yo'q</p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ - WMG Admin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/header', { user: user }) %>
+
+    <div class="container">
+      <div class="page-header">
+        <h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path
+              d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
+            />
+          </svg>
+          FAQ (Ko'p beriladigan savollar)
+        </h1>
+        <p class="page-subtitle">Botdagi savol-javoblar bazasi</p>
+      </div>
+
+      <% if (success) { %>
+      <div class="alert alert-success"><%= success %></div>
+      <% } %> <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <div class="content-card">
+        <div class="card-header">
+          <h2>Yangi savol qo'shish</h2>
+        </div>
+        <form action="/admin/faq/add" method="POST" class="bilingual-form">
+          <div class="form-row">
+            <div class="form-col">
+              <h3 class="lang-label">O'zbekcha (Lotin)</h3>
+
+              <div class="form-group">
+                <label for="question_latin">Savol:</label>
+                <textarea
+                  id="question_latin"
+                  name="question_latin"
+                  rows="3"
+                  placeholder="Savol matni..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="answer_latin">Javob:</label>
+                <textarea
+                  id="answer_latin"
+                  name="answer_latin"
+                  rows="5"
+                  placeholder="Javob matni..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-col">
+              <h3 class="lang-label">Ўзбекча (Кирилл)</h3>
+
+              <div class="form-group">
+                <label for="question_cyrillic">Савол:</label>
+                <textarea
+                  id="question_cyrillic"
+                  name="question_cyrillic"
+                  rows="3"
+                  placeholder="Савол матни..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="answer_cyrillic">Жавоб:</label>
+                <textarea
+                  id="answer_cyrillic"
+                  name="answer_cyrillic"
+                  rows="5"
+                  placeholder="Жавоб матни..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+              />
+            </svg>
+            Qo'shish
+          </button>
+        </form>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header">
+          <h2>Barcha FAQ</h2>
+          <span class="badge"><%= faq.length %> ta</span>
+        </div>
+
+        <% if (faq && faq.length > 0) { %>
+        <div class="faq-grid">
+          <% faq.forEach((item, index) => { %>
+          <div class="faq-card">
+            <div class="faq-card-number">#<%= index + 1 %></div>
+            <div class="faq-card-content">
+              <div class="faq-languages">
+                <div class="faq-lang-item">
+                  <span class="lang-badge">Lotin</span>
+                  <div class="faq-question">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                      />
+                      <path
+                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
+                      />
+                    </svg>
+                    <%= item.question_latin || 'N/A' %>
+                  </div>
+                  <div class="faq-answer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                      />
+                    </svg>
+                    <%= item.answer_latin || 'N/A' %>
+                  </div>
+                </div>
+
+                <div class="faq-lang-divider"></div>
+
+                <div class="faq-lang-item">
+                  <span class="lang-badge cyrillic">Кирилл</span>
+                  <div class="faq-question">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                      />
+                      <path
+                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
+                      />
+                    </svg>
+                    <%= item.question_cyrillic || 'N/A' %>
+                  </div>
+                  <div class="faq-answer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                      />
+                    </svg>
+                    <%= item.answer_cyrillic || 'N/A' %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-card-footer">
+                <span class="faq-date">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                    />
+                  </svg>
+                  <%= new Date(item.created_at).toLocaleDateString('uz-UZ', {
+                  year: 'numeric', month: 'long', day: 'numeric' }) %>
+                </span>
+                <form
+                  action="/admin/faq/delete/<%= item.id || item._id %>"
+                  method="POST"
+                  onsubmit="return confirm('O\'chirishni tasdiqlaysizmi?')"
+                >
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                      />
+                      <path
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                      />
+                    </svg>
+                    O'chirish
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <% } else { %>
+        <div class="empty-state">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="64"
+            height="64"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path
+              d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
+            />
+          </svg>
+          <p>Hozircha FAQ yo'q</p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
