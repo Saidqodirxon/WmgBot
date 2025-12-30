@@ -135,6 +135,7 @@ function createUserBot(token, adminGroupId) {
   bot.action(/lang_(cyrillic|latin)/, handleLanguageSelection);
   bot.action(/reg_course_[a-f0-9]+_.+/, handleCourseSelection);
   bot.action("reg_courses_confirm", handleCourseSelection);
+  bot.action("reg_skip", handleCourseSelection);
 
   // Contact handler for phone number
   bot.on("contact", handlePhoneNumber);
